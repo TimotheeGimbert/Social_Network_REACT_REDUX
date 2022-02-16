@@ -12,12 +12,11 @@ export const register = (newUserData) => {
   }
 }
 
-export const connect = (userInput) => {
+export const connect = (token) => {
   return {
     type: CONNECT,
     payload: {
-      identifier: userInput.username || userInput.email,
-      password: userInput.password,
+      token: token
     }
   }
 }
