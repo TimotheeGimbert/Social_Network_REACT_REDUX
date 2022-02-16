@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { disconnect } from '../redux/user/userActions';
 import Cookies from 'js-cookie';
 
-export default function Navbar() {
+const Navbar = () => {
   const dispatch = useDispatch();
 
   const checkAuth = () => {
@@ -32,3 +32,5 @@ export default function Navbar() {
     </header>
   )
 };
+
+export default Navbar;

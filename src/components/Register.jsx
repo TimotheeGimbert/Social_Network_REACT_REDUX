@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { register } from '../redux/user/userActions';
 
 
-export default function Register() {
+const Register = () => {
   const dispatch = useDispatch();
   
   const userAuthInput = { // TEMPORARY
@@ -38,3 +38,5 @@ export default function Register() {
     </>
   )
 }
+
+export default Register;
