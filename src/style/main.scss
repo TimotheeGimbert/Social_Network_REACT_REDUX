@@ -1,9 +1,25 @@
+@import './variables';
+
 body {
   margin: 0;
   padding: 0;
   height: 100vh;
   width: 100vw;
   background-color: rgb(21, 24, 24);
+  color: $txt-white;
+}
+
+.Navbar {
+  margin: 0;
+  padding: 2vh 2vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $background-dark;
+
+  nav > * {
+    margin: 0 1vw;
+  }
 }
 
 .app-container {
@@ -16,7 +32,7 @@ body {
 
 button {
   background-color: rgba(202, 0, 0, 0.774);
-  color: white;
+  color: $txt-white;
   padding: 6px 60px;
   margin: 6px 0;
   border: none;
@@ -27,4 +43,23 @@ button {
       transform: scale(1.2);  
       cursor: pointer;
     }
+}
+
+a, a:visited {
+	text-decoration: none;
+	position: relative;
+	color: $txt-white;
+	&:after {
+		content: '';
+		height: 1px;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 0%;
+		background: $txt-white;
+		transition: 0.5s;
+	}
+	&:hover:after {
+		width: 100%;
+	}
 }

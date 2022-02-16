@@ -1,4 +1,4 @@
-import { REGISTER, CONNECT, DISCONNECT} from './userTypes'
+import { REGISTER, LOGIN, DISCONNECT} from './userTypes'
 
 const initialState = {
   username: undefined,
@@ -16,7 +16,7 @@ const userReducer = (state = initialState, action) => {
         email: action.payload.email,
         token: action.payload.token
       }
-    case CONNECT:
+    case LOGIN:
       return {
         ...state,
         token: action.payload.token

@@ -1,3 +1,3 @@
 export const REGISTER = 'REGISTER';
-export const CONNECT = 'CONNECT';
+export const LOGIN = 'LOGIN';
 export const DISCONNECT = 'DISCONNECT';

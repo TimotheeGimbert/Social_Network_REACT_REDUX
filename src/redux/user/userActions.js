@@ -1,4 +1,4 @@
-import { REGISTER, CONNECT, DISCONNECT } from './userTypes'
+import { REGISTER, LOGIN, DISCONNECT } from './userTypes'
 
 export const register = (newUserData) => {
   return {
@@ -12,9 +12,9 @@ export const register = (newUserData) => {
   }
 }
 
-export const connect = (token) => {
+export const login = (token) => {
   return {
-    type: CONNECT,
+    type: LOGIN,
     payload: {
       token: token
     }

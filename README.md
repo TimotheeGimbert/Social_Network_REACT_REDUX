@@ -10,6 +10,7 @@ REACT
 REDUX
 react-redux
 redux-thunk
+react-router-dom
 js-cookie
 local api Strapi
 jwt-decode (for decrypting registering tokens)
