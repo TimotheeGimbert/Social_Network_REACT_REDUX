@@ -4,9 +4,10 @@ const userAuthInput = { // TEMPORARY
   password: 'aZerty1234',
 };
 
-export const loginMiddleware = () => {
+export const loginMiddleware = (inputs) => {
   const url = 'http://localhost:1337/auth/local';
   const method = 'post';
+  console.log(inputs);
   const authInput = {
     identifier: userAuthInput.email,
     password: userAuthInput.password

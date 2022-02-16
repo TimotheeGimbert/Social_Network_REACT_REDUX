@@ -8,10 +8,11 @@ import Register from './components/Register'
 import Login from './components/Login'
 import Profile from './components/Profile'
 import PrivateRoute from './components/PrivateRoute'
+import Cookies from 'js-cookie'
 
 
 const App = () => {
-
+  
   return (
     <Provider store={store}>
       <Router>
@@ -25,12 +26,16 @@ const App = () => {
               <PrivateRoute>
                 <Profile />
               </PrivateRoute>
-            } 
+            }
           />
         </Routes>
       </Router>
     </Provider>
   );
+}
+
+export const checkAuth = () => {
+  return Cookies.get().token !== undefined ? true : false;
 }
 
 export default App;
