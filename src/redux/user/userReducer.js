@@ -4,6 +4,7 @@ const initialState = {
   username: undefined,
   email: undefined,
   token: undefined,
+  id: undefined
 }
 
 const userReducer = (state = initialState, action) => {
