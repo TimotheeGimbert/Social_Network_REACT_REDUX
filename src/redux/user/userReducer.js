@@ -4,7 +4,7 @@ const initialState = {
   token: undefined,
   username: '',
   email: '',
-  id: undefined
+  id: ''
 }
 
 const userReducer = (state = initialState, action) => {
@@ -18,7 +18,6 @@ const userReducer = (state = initialState, action) => {
     case LOGIN:
       return {
         ...state,
-        token: action.payload.token,
         username: action.payload.username,
         email: action.payload.email,
         id: action.payload.id

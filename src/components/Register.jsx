@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import useFetch from '../customHooks/useFetch';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { register, login } from '../redux/user/userActions';
 
 const Register = () => {
   const [userInputs, setUserInputs] = useState( { email: '', username: '', password: '' } );
   const { doFetch } = useFetch();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -23,7 +26,7 @@ const Register = () => {
       password: userInputs.password
     }
     const response = await doFetch(ressource, method, postData);
-    console.log('token from doRegister: ', response);
+    dispatch(register(response.jwt))
   }
 
   const doLogin = async () => {
@@ -34,15 +37,15 @@ const Register = () => {
       password: userInputs.password
     }
     const response = await doFetch(ressource, method, postData);
-    console.log('userData from doLogin: ', response);
-    Cookies.set('token', response.jwt , { expires: 1 }, { secure: true }, { sameSite: 'strict' }); 
-    navigate('/profile');
+    dispatch(login(response.user));
+    Cookies.set('token', response.jwt , { expires: 1 }, { secure: true }, { sameSite: 'strict' });
   }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     await doRegister();
     await doLogin();
+    navigate('/profile');
   }
 
   return (
