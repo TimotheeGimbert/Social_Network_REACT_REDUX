@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getLocalToken } from '../App';
-import { edit } from '../redux/user/userActions';
+import { edit } from '../redux/user/actions';
 
 
 const Profile = () => {

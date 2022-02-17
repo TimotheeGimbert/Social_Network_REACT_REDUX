@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
-import { login } from '../redux/user/userActions';
+import { login } from '../redux/user/actions';
 import { useNavigate } from 'react-router-dom';
 
 

@@ -1,4 +1,4 @@
-import { REGISTER, LOGIN, DISCONNECT, EDIT } from './userTypes'
+import { REGISTER, LOGIN, DISCONNECT, EDIT } from './types'
 
 export const register = (token) => {
   return {

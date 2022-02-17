@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { disconnect } from '../redux/user/userActions';
+import { disconnect } from '../redux/user/actions';
 import Cookies from 'js-cookie';
 import { checkAuth } from '../App';
 

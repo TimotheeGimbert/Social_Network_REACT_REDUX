@@ -3,7 +3,7 @@ import useFetch from '../customHooks/useFetch';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { register, login } from '../redux/user/userActions';
+import { register, login } from '../redux/user/actions';
 
 const Register = () => {
   const [userInputs, setUserInputs] = useState( { email: '', username: '', password: '' } );
