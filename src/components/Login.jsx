@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { login } from '../redux/user/userActions';
-import { loginMiddleware } from '../redux/user/userMiddleware';
 import Cookies from 'js-cookie';
+import { login } from '../redux/user/userActions';
 
 
 const Login = () => {
+  const [inputs, setInputs] = useState( { identifier: '', password: '' } );
   const dispatch = useDispatch();
-  const [inputs, setInputs] = useState( { email: '', password: '' } );
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -17,7 +16,16 @@ const Login = () => {
 
   const handleLogin = (event) => {
     event.preventDefault();
-    loginMiddleware(inputs)
+    const data = inputs;
+    fetch('http://localhost:1337/auth/local', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then( (response) => response.json() )
+    .then( (json) => json.jwt )
     .then( (token) => {
       Cookies.set('token', token, { expires: 1 }, { secure: true }, { sameSite: 'strict' });
       dispatch(login(token));
@@ -31,9 +39,9 @@ const Login = () => {
         <label>Enter your email :
           <input 
             type='text' 
-            name='email'
+            name='identifier'
             onChange={handleChange}
-            value={inputs.email}
+            value={inputs.identifier}
           />
         </label>
         <label>Enter your password :
@@ -44,7 +52,7 @@ const Login = () => {
           value={inputs.password} 
         />
         </label>
-        <input type='submit' />
+        <button type='submit'>Log In</button>
       </form>
     </>
   )

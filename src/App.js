@@ -38,4 +38,8 @@ export const checkAuth = () => {
   return Cookies.get().token !== undefined ? true : false;
 }
 
+export const getLocalToken = () => {
+  return Cookies.get().token;
+}
+
 export default App;

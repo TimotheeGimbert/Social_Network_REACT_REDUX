@@ -1,21 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { disconnect } from '../redux/user/userActions';
 import Cookies from 'js-cookie';
 
 const Navbar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const checkAuth = () => {
     return Cookies.get().token !== undefined ? true : false;
   }
 
   const handleDisconnect = () => {
-    return (dispath) => {
-      Cookies.remove('token');
-      dispatch(disconnect());
-    }
+    Cookies.remove('token');
+    dispatch(disconnect());
+    navigate('/login');
   }
 
   return (
@@ -28,7 +28,7 @@ const Navbar = () => {
       </nav>
       <button onClick={() => console.log(checkAuth())}>Check Authentification</button>
       <button onClick={() => console.log(Cookies.get())}>Show cookies</button>
-      <button onClick={ () => dispatch(handleDisconnect()) }>Disconnect</button>
+      <button onClick={() => handleDisconnect() }>Disconnect</button>
     </header>
   )
 };
