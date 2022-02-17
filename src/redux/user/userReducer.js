@@ -1,10 +1,14 @@
-import { REGISTER, LOGIN, DISCONNECT} from './userTypes'
+import { REGISTER, LOGIN, DISCONNECT, EDIT } from './userTypes'
 
 const initialState = {
-  token: undefined
+  token: undefined,
+  username: '',
+  email: '',
+  id: undefined
 }
 
 const userReducer = (state = initialState, action) => {
+  console.log('action: ', action)
   switch(action.type) {
     case REGISTER:
       return {
@@ -14,12 +18,22 @@ const userReducer = (state = initialState, action) => {
     case LOGIN:
       return {
         ...state,
-        token: action.payload.token
+        token: action.payload.token,
+        username: action.payload.username,
+        email: action.payload.email,
+        id: action.payload.id
       }
     case DISCONNECT:
       return {
         ...state,
         token: undefined
+      }
+    case EDIT:
+      return {
+        ...state,
+        username: action.payload.username,
+        email: action.payload.email,
+        description: action.payload.description
       }
     default:
       return state

@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
 import { login } from '../redux/user/userActions';
+import { useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
-  const [inputs, setInputs] = useState( { identifier: '', password: '' } );
+  const [inputs, setInputs] = useState( { email: '', password: '' } );
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -16,8 +18,13 @@ const Login = () => {
 
   const handleLogin = (event) => {
     event.preventDefault();
-    const data = inputs;
-    fetch('http://localhost:1337/auth/local', {
+    const url = 'http://localhost:1337/auth/local';
+    const data = {
+      identifier: inputs.email,
+      password: inputs.password
+    }
+    console.log(data);
+    fetch(url, {
       method: 'post',
       headers: {
         'Content-Type': 'application/json'
@@ -25,12 +32,12 @@ const Login = () => {
       body: JSON.stringify(data)
     })
     .then( (response) => response.json() )
-    .then( (json) => json.jwt )
-    .then( (token) => {
-      Cookies.set('token', token, { expires: 1 }, { secure: true }, { sameSite: 'strict' });
-      dispatch(login(token));
-    });
-  };
+    .then( (response) => {
+      dispatch(login(response));
+      Cookies.set('token', response.jwt , { expires: 1 }, { secure: true }, { sameSite: 'strict' }); 
+      navigate('/profile');
+    })
+  }
 
   return (
     <>
@@ -39,9 +46,9 @@ const Login = () => {
         <label>Enter your email :
           <input 
             type='text' 
-            name='identifier'
+            name='email'
             onChange={handleChange}
-            value={inputs.identifier}
+            value={inputs.email}
           />
         </label>
         <label>Enter your password :

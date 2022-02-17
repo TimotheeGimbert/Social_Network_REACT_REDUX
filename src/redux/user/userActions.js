@@ -1,22 +1,22 @@
-import { REGISTER, LOGIN, DISCONNECT } from './userTypes'
+import { REGISTER, LOGIN, DISCONNECT, EDIT } from './userTypes'
 
-export const register = (newUserData) => {
+export const register = (token) => {
   return {
     type: REGISTER,
     payload: {
-      username: newUserData.username,
-      email: newUserData.email,
-      password: newUserData.password,
-      token: newUserData.token
+      token: token
     }
   }
 }
 
-export const login = (token) => {
+export const login = (response) => {
   return {
     type: LOGIN,
     payload: {
-      token: token
+      token: response.jwt,
+      username: response.user.username,
+      email: response.user.email,
+      id: response.user.id
     }
   }
 }
@@ -24,5 +24,16 @@ export const login = (token) => {
 export const disconnect = () => {
   return {
     type: DISCONNECT,
+  }
+}
+
+export const edit = (response) => {
+  return {
+    type: EDIT,
+    payload: {
+      username: response.username,
+      email: response.email,
+      description: response.description
+    }
   }
 }
