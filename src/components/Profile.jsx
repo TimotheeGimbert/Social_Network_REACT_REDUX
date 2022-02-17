@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { getLocalToken } from '../App';
 import { edit } from '../redux/user/userActions';
 
 
 const Profile = () => {
   const user = useSelector(state => state);
+  const [ token ] = useState( getLocalToken() );
   const [inputs, setInputs] = useState( { username: '', description: ''} );
   const dispatch = useDispatch();
 
@@ -23,7 +25,7 @@ const Profile = () => {
     fetch(url, {
       method: 'get',
       headers: {
-        'Authorization': `Bearer ${user.token}`,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       }
     })
@@ -40,7 +42,7 @@ const Profile = () => {
     fetch(url, {
       method: 'put',
       headers: {
-        'Authorization': `Bearer ${user.token}`,
+        'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(inputs)
@@ -78,7 +80,7 @@ const Profile = () => {
             value={inputs.description}
           />
         </label>
-        <button type='submit'>Submit modificaitons</button>
+        <button type='submit'>Submit modifications</button>
       </form>
 
       <button onClick={fetchProfile}>Fetch profile in console</button>

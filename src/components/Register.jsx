@@ -1,70 +1,60 @@
-import Cookies from 'js-cookie';
 import React, { useState } from 'react';
+import useFetch from '../customHooks/useFetch';
+import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { register , login} from '../redux/user/userActions';
-
 
 const Register = () => {
-  const [inputs, setInputs] = useState( { email: '', username: '', password: ''} );
-  const dispatch = useDispatch();
+  const [userInputs, setUserInputs] = useState( { email: '', username: '', password: '' } );
+  const { doFetch } = useFetch();
   const navigate = useNavigate();
 
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setInputs(values => ( {...values, [name]: value} ))
+    setUserInputs(values => ( {...values, [name]: value} ))
   }
 
-  const handleLogin = () => {
-    const url = 'http://localhost:1337/auth/local';
-    const data = {
-      identifier: inputs.email,
-      password: inputs.password
+  const doRegister = async () => {
+    const ressource = 'auth/local/register';
+    const method = 'post';
+    const postData = {
+      email: userInputs.email,
+      username: userInputs.username,
+      password: userInputs.password
     }
-    fetch(url, {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-    .then( (response) => response.json() )
-    .then( (response) => {
-      dispatch(login(response));
-      Cookies.set('token', response.jwt , { expires: 1 }, { secure: true }, { sameSite: 'strict' }); 
-      navigate('/profile');
-    })
+    const response = await doFetch(ressource, method, postData);
+    console.log('token from doRegister: ', response);
   }
 
-  const handleRegister = (event) => {
+  const doLogin = async () => {
+    const ressource = 'auth/local';
+    const method = 'post';
+    const postData = {
+      identifier: userInputs.email,
+      password: userInputs.password
+    }
+    const response = await doFetch(ressource, method, postData);
+    console.log('userData from doLogin: ', response);
+    Cookies.set('token', response.jwt , { expires: 1 }, { secure: true }, { sameSite: 'strict' }); 
+    navigate('/profile');
+  }
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const url = 'http://localhost:1337/auth/local/register';
-    fetch(url, {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(inputs)
-    })
-    .then( (response) => response.json() )
-    .then( (json) => json.jwt )
-    .then( (token) => {
-      dispatch(register(token));
-      handleLogin();
-    })
-  };
+    await doRegister();
+    await doLogin();
+  }
 
   return (
     <>
       <div>Register</div>
-      <form onSubmit={handleRegister}>
+      <form onSubmit={handleSubmit}>
         <label>Enter your email :
           <input 
             type='text' 
             name='email'
             onChange={handleChange}
-            value={inputs.email}
+            value={userInputs.email}
           />
         </label>
         <label>Choose a username :
@@ -72,7 +62,7 @@ const Register = () => {
             type='text' 
             name='username'
             onChange={handleChange}
-            value={inputs.username}
+            value={userInputs.username}
           />
         </label>
         <label>Choose a password :
@@ -80,7 +70,7 @@ const Register = () => {
           type='password' 
           name='password'
           onChange={handleChange}
-          value={inputs.password} 
+          value={userInputs.password} 
         />
         </label>
         <button type='submit'>Register</button>

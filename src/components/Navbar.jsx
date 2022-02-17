@@ -10,10 +10,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const user = useSelector(state => state);
 
-  const checkAuth = () => {
-    return Cookies.get().token !== undefined ? true : false;
-  }
-
   const handleDisconnect = () => {
     Cookies.remove('token');
     dispatch(disconnect());
