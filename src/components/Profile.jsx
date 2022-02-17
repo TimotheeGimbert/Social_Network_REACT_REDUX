@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { edit } from '../redux/user/userActions';
 
@@ -7,6 +7,10 @@ const Profile = () => {
   const user = useSelector(state => state);
   const [inputs, setInputs] = useState( { username: '', description: ''} );
   const dispatch = useDispatch();
+
+  useEffect( () => {
+    fetchProfile();
+  }, []);
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -25,7 +29,8 @@ const Profile = () => {
     })
     .then( (response) => response.json() )
     .then( (response) => {
-      console.log(response)
+      console.log(response);
+      dispatch(edit(response))
     })
   }
 

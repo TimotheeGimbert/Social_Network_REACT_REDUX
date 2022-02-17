@@ -7,6 +7,7 @@ import Home from './components/Home'
 import Register from './components/Register'
 import Login from './components/Login'
 import Profile from './components/Profile'
+import User from './components/User'
 import PrivateRoute from './components/PrivateRoute'
 import Cookies from 'js-cookie'
 
@@ -21,10 +22,17 @@ const App = () => {
           <Route path='/' element= { <Home /> } />
           <Route path='/register' element= { <Register /> } />
           <Route path='/login' element= { <Login /> } />
-          <Route path="/profile" 
+          <Route path='/profile' 
             element={
               <PrivateRoute>
                 <Profile />
+              </PrivateRoute>
+            }
+          />
+          <Route path='/users/:id' 
+            element={
+              <PrivateRoute>
+                <User />
               </PrivateRoute>
             }
           />
