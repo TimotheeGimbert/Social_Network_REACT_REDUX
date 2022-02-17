@@ -32,7 +32,8 @@ export const edit = (response) => {
     payload: {
       username: response.username,
       email: response.email,
-      description: response.description
+      description: response.description,
+      id: response.id
     }
   }
 }

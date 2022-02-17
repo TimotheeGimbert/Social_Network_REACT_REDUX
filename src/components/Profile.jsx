@@ -5,8 +5,8 @@ import { edit } from '../redux/user/userActions';
 
 
 const Profile = () => {
+  const token = getLocalToken();
   const user = useSelector(state => state);
-  const [ token ] = useState( getLocalToken() );
   const [inputs, setInputs] = useState( { username: '', description: ''} );
   const dispatch = useDispatch();
 

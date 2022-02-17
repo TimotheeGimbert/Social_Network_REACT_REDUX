@@ -32,7 +32,8 @@ const userReducer = (state = initialState, action) => {
         ...state,
         username: action.payload.username,
         email: action.payload.email,
-        description: action.payload.description
+        description: action.payload.description,
+        id: action.payload.id
       }
     default:
       return state
