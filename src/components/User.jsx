@@ -27,12 +27,11 @@ const User = () => {
   };
 
   return (
-    <>
-      <h1>User Public profile page</h1>
+    <div className='profile'>
+      <h1>{inputs.username}</h1>
       <div>ID: {inputs.id}</div>
-      <div>Username: {inputs.username}</div>
       <div>Description: {inputs.description}</div>
-    </>
+    </div>
   );
 };
 
