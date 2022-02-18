@@ -7,7 +7,7 @@ const initialState = {
   id: ''
 }
 
-const userReducer = (state = initialState, action) => {
+const userReducer = (state = initialState , action) => {
   console.log('action: ', action)
   switch(action.type) {
     case REGISTER:
@@ -18,6 +18,7 @@ const userReducer = (state = initialState, action) => {
     case LOGIN:
       return {
         ...state,
+        token: action.payload.token,
         username: action.payload.username,
         email: action.payload.email,
         id: action.payload.id

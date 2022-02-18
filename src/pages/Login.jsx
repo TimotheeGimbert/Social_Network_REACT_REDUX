@@ -27,7 +27,8 @@ const Login = () => {
       password: userInputs.password
     }
     const response = await doFetch(ressource, method, postData);
-    dispatch(login(response.user));
+    dispatch(login(response));
+    console.log('FROMMMM', response);
     Cookies.set('token', response.jwt , { expires: 1 }, { secure: true }, { sameSite: 'strict' });
   }
 

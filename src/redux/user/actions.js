@@ -13,9 +13,10 @@ export const login = (response) => {
   return {
     type: LOGIN,
     payload: {
-      username: response.username,
-      email: response.email,
-      id: response.id
+      token: response.jwt,
+      username: response.user.username,
+      email: response.user.email,
+      id: response.user.id
     }
   }
 }

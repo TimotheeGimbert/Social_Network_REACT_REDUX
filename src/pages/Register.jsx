@@ -37,7 +37,7 @@ const Register = () => {
       password: userInputs.password
     }
     const response = await doFetch(ressource, method, postData);
-    dispatch(login(response.user));
+    dispatch(login(response));
     Cookies.set('token', response.jwt , { expires: 1 }, { secure: true }, { sameSite: 'strict' });
   }
 
