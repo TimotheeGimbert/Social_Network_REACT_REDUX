@@ -4,6 +4,7 @@ import useFetchPosts from '../customHooks/useFetchPosts';
 import { useSelector } from 'react-redux';
 import { checkAuth } from '../App';
 import Post from '../components/Post';
+import { Link } from 'react-router-dom';
 
 
 const Home = () => {
@@ -65,26 +66,33 @@ const Home = () => {
         small social media website.
       </p>
 
-      <form onSubmit={handleSubmit}>
-        <label>
-          <input
-            type='text'
-            name='message'
-            onChange={handleChange}
-            value={userInputs.message}
-            />
-        </label>
-        { checkAuth() &&  
-          <button type='submit'>Post your message</button>
-        }
-      </form>
+      { !checkAuth() &&
+        <button>
+          <Link to="/register">Register</Link>
+        </button>
+      }
+      
+      { checkAuth() && 
+        <>
+          <form onSubmit={handleSubmit}>
+            <label>
+              <input
+                type='text'
+                name='message'
+                onChange={handleChange}
+                value={userInputs.message}
+                />
+            </label>
+              <button type='submit'>Post your message</button>
+          </form>
 
-        <div className='posts'>
-          {
-            messageList.map( (post, index) => <Post post={post} key={index} />)
-          }
-        </div>
-
+          <div className='posts'>
+            {
+              messageList.map( (post, index) => <Post post={post} key={index} />)
+            }
+          </div>
+        </> 
+      }
     </div>
   )
 }
