@@ -55,37 +55,41 @@ const Profile = () => {
   }
 
   return (
-    <>
+    <div className='profile'>
       <h1>Profile</h1>
       <div>ID: {user.id}</div>
       <div>Username: {user.username}</div>
       <div>Email: {user.email}</div>
       <div>Description: {user.description}</div>
 
-      <div>Edit your profile</div>
-      <form onSubmit={handleEdition}>
-        <label>New Username :
-          <input 
-            type='text' 
-            name='username'
-            onChange={handleChange}
-            value={inputs.username}
-          />
-        </label>
-        <label>Enter a description :
-          <input 
-            type='text' 
-            name='description'
-            onChange={handleChange}
-            value={inputs.description}
-          />
-        </label>
-        <button type='submit'>Submit modifications</button>
-      </form>
-
-      <button onClick={fetchProfile}>Fetch profile in console</button>
-    </>
+      <div className='edit'>
+        <h2>Edit your profile</h2>
+        <form onSubmit={handleEdition}>
+          <label>New Username :
+            <input 
+              type='text' 
+              name='username'
+              onChange={handleChange}
+              value={inputs.username}
+            />
+          </label>
+          <label>Enter a description :
+            <input 
+              type='text' 
+              name='description'
+              onChange={handleChange}
+              value={inputs.description}
+            />
+          </label>
+          <button type='submit'>Submit modifications</button>
+        </form>
+      </div>
+    </div>
   )
 }
 
 export default Profile;
+
+
+{/*       <button onClick={fetchProfile}>Fetch profile in console</button>
+ */}    

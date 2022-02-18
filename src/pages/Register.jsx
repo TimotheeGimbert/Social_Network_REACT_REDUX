@@ -49,8 +49,8 @@ const Register = () => {
   }
 
   return (
-    <>
-      <div>Register</div>
+    <div className='auth'>
+      <h1>Register</h1>
       <form onSubmit={handleSubmit}>
         <label>Enter your email :
           <input 
@@ -78,7 +78,7 @@ const Register = () => {
         </label>
         <button type='submit'>Register</button>
       </form>
-    </>
+    </div>
   )
 }
 

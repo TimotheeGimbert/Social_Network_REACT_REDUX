@@ -24,11 +24,10 @@ const Navbar = () => {
         { !checkAuth() && <Link to="/login">Login</Link> }
         { checkAuth() && <Link to="/profile">Profile</Link> }
       </nav>
-      <button onClick={() => console.log(checkAuth())}>Check Authentification</button>
+      {/* <button onClick={() => console.log(checkAuth())}>Check Authentification</button>
       <button onClick={() => console.log(Cookies.get())}>Show cookies</button>
+      <button onClick={() => console.log(user) }>Show user</button> */}
       <button onClick={() => handleDisconnect() }>Disconnect</button>
-      <button onClick={() => console.log(user) }>Show user</button>
-
     </header>
   )
 };

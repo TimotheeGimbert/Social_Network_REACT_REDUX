@@ -9,6 +9,10 @@ body {
   color: $txt-white;
 }
 
+#root {
+  height: 100%;
+}
+
 .Navbar {
   margin: 0;
   padding: 2vh 2vw;
@@ -22,16 +26,8 @@ body {
   }
 }
 
-.app-container {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
 button {
-  background-color: rgba(202, 0, 0, 0.774);
+  background-color: rgba(23, 131, 23, 0.774);
   color: $txt-white;
   padding: 6px 60px;
   margin: 6px 0;
@@ -62,4 +58,57 @@ a, a:visited {
 	&:hover:after {
 		width: 100%;
 	}
+}
+
+.auth {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    margin-bottom: 6vh;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
+    input {
+      margin-top: 1vh;
+    }
+
+    button {
+      margin-top: 3vh;
+    }
+  }
+}
+
+.profile {
+  margin-top: 11vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+
+  .edit {
+    margin-top: 6vh;
+    text-align: end;
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        color: green;
+      }
+
+      button {
+        margin-top: 3vh;
+      }
+    }
+  }
 }

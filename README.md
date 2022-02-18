@@ -2,8 +2,6 @@
 This website is a training to Redux and React. 
 We use auth and routing to create a small social media website.
 
-# ONLINE VERSION :
-
 
 Use of :
 REACT
