@@ -3,52 +3,50 @@ import { useDispatch } from 'react-redux';
 import Cookies from 'js-cookie';
 import { login } from '../redux/user/actions';
 import { useNavigate } from 'react-router-dom';
+import useFetch from '../customHooks/useFetch';
 
 
 const Login = () => {
-  const [inputs, setInputs] = useState( { email: '', password: '' } );
+  const [userInputs, setUserInputs] = useState( { email: '', password: '' } );
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { doFetch } = useFetch();
+
 
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    setInputs(values => ( {...values, [name]: value} ))
+    setUserInputs(values => ( {...values, [name]: value} ))
   }
 
-  const handleLogin = (event) => {
-    event.preventDefault();
-    const url = 'http://localhost:1337/auth/local';
-    const data = {
-      identifier: inputs.email,
-      password: inputs.password
+  const doLogin = async () => {
+    const ressource = 'auth/local';
+    const method = 'post';
+    const postData = {
+      identifier: userInputs.email,
+      password: userInputs.password
     }
-    console.log(data);
-    fetch(url, {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    })
-    .then( (response) => response.json() )
-    .then( (response) => {
-      dispatch(login(response));
-      Cookies.set('token', response.jwt , { expires: 1 }, { secure: true }, { sameSite: 'strict' }); 
-      navigate('/profile');
-    })
+    const response = await doFetch(ressource, method, postData);
+    dispatch(login(response.user));
+    Cookies.set('token', response.jwt , { expires: 1 }, { secure: true }, { sameSite: 'strict' });
+  }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await doLogin();
+    navigate('/profile');
   }
 
   return (
     <div className='auth'>
       <h1>Login</h1>
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleSubmit}>
         <label>Enter your email :
           <input 
             type='text' 
             name='email'
             onChange={handleChange}
-            value={inputs.email}
+            value={userInputs.email}
           />
         </label>
         <label>Enter your password :
@@ -56,7 +54,7 @@ const Login = () => {
           type='password' 
           name='password'
           onChange={handleChange}
-          value={inputs.password} 
+          value={userInputs.password} 
         />
         </label>
         <button type='submit'>Log In</button>
